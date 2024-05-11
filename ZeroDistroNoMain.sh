@@ -4,7 +4,13 @@ sudo systemctl start NetworkManager
 
 echo "Activar conexión..."
 read confirmacion2
-nmtui
+
+if [ confirmacion2 == '']
+then
+	nmtui
+else
+	nmtui
+fi
 
 # POST-INSTALACIÓN ZD
 sudo pacman -S xorg-server xorg-apps xorg-xinit xf86-video-intel(intel) xf86-video-amdgpu(amd) xf86-video-nouveau(nvidia) bspwm sxhkd

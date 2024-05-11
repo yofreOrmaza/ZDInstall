@@ -15,45 +15,31 @@ clear
 genfstab -U /mnt >> /mnt/etc/fstab
 
 # Cambiar raiz al nuevo sistema (Ingresar al sistema)
-arch-chroot /mnt
+echo "Presiona ENTER para continuar..."
+read confirmacionParaCambiarRaiz
 
-clear
+if [ confirmacionParaCambiarRaiz == ' ']
+then
+	arch-chroot /mnt
+else
+	arch-chroot /mnt
+fi
 
 # Zona horaria
-echo "¿Zone?"
-ls /usr/share/zoneinfo
-read GlobalZone
-
-echo "¿Specific zone?"
-ls /usr/share/$GlobalZone/
-read SpecificZone
-
-ln -sf /usr/share/zoneinfo/$GlobalZone/$SpecificZone /etc/localtime
+ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime
 
 hwclock --systohc # Generación de archivo adjtime
 
 # System Language
 
 touch /etc/locale.gen
-echo "System Language: ¿es, en?"
-read systemlanguage
-
-if [ $systemlanguage == 'es' ]
-then
-	echo "${systemlanguage}_ES.UTF-8 UTF-8" >> /etc/locale.gen
-	locale-gen
-	touch /etc/locale.conf
-	echo "LANG=es_ES.UTF-8" >> /etc/locale.conf
-	touch /etc/vconsole.conf
-	echo "KEYMAP=es" >> /etc/vconsole.conf
-else
-	echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
-	locale-gen
-	touch /etc/locale.conf
-	echo "LANG=en_US.UTF-8"
-	touch /etc/vconsole.conf
-	echo "KEYMAP=us" >> /etc/vconsole.conf
-fi
+echo "System Language..."
+echo "es_ES.UTF-8 UTF-8" >> /etc/locale.gen
+locale-gen
+touch /etc/locale.conf
+echo "LANG=es_ES.UTF-8" >> /etc/locale.conf
+touch /etc/vconsole.conf
+echo "KEYMAP=es" >> /etc/vconsole.conf
 
 clear
 
@@ -90,10 +76,10 @@ clear
 pacman -S grub os-prober efibootmgr
 
 # UEFI or BIOS
-echo "UEFI o BIOS?"
+echo "1) UEFI\n2) BIOS\n..."
 read uefiorbios
 
-if [ uefiorbios == 'BIOS']
+if [ uefiorbios == 2]
 then
 	fdisk -l
 	echo "En que disco desea instalar grub? Por ejemplo: /dev/sda"
