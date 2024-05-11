@@ -21,6 +21,8 @@ sudo systemctl enable ly.service
 
 sudo pacman -S ttf-jetbrains-mono-nerd bash dmenu nitrogen fastfetch vlc picom xfce4-terminal xfce4-settings xfce4-session plank picom arandr polybar git brightnessctl pcmanfm firefox openssh unzip udisks2 scrot kolourpaint pipewire pipewire-pulse pavucontrol xdg-user-dirs btop libinput bluez bluez-utils blueman
 
+cd
+
 xdg-user-dirs-update
 
 touch .xprofile
@@ -31,6 +33,7 @@ echo -e "nitrogen /etc/WallZD/mainwallpaperZD.png" >> .xprofile
 echo -e "nitrogen --restore &" >> .xprofile
 echo -e "exec bspwm" >> .xprofile
 
+cd
 
 mkdir .config
 mkdir .config/bspwm

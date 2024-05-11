@@ -27,7 +27,7 @@ fi
 
 # Zona horaria
 ln -sf /usr/share/zoneinfo/America/Bogota /etc/localtime
-
+cd
 hwclock --systohc # Generación de archivo adjtime
 
 # System Language
